@@ -1,7 +1,7 @@
 ﻿namespace MassTransitPublisherListener.EventContracts
 {
-    public class ValueEntered
+    public interface ValueEntered
     {
-        public string Value { get; set; }
+        public string Value { get; }
     }
 }

@@ -28,6 +28,8 @@ namespace MassTransitPublisherListener.Controllers
         {
             await _publishEndpoint.Publish<ValueEntered>(new { Value = value });
 
+            _logger.LogInformation($"Published value: {value}");
+
             return Ok();
         }
     }
