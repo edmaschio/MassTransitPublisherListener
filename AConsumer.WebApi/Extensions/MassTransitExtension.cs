@@ -1,11 +1,10 @@
-﻿using MassTransit;
-using MassTransit.ExtensionsDependencyInjectionIntegration;
-using MassTransitPublisherListener.Consumers;
+﻿using AConsumer.WebApi.Consumers;
+using MassTransit;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
-namespace MassTransitPublisherListener.Extensions
+namespace AConsumer.WebApi.Extensions
 {
     public static class MassTransitExtension
     {
@@ -23,7 +22,7 @@ namespace MassTransitPublisherListener.Extensions
 
             services.AddMassTransit(x =>
             {
-                x.AddConsumer<ValueEnteredEventConsumer>();
+                x.AddConsumer<ValueEnteredAnotherEventConsumer>();
 
                 x.SetKebabCaseEndpointNameFormatter();
 
@@ -45,5 +44,6 @@ namespace MassTransitPublisherListener.Extensions
 
             services.AddMassTransitHostedService(true);
         }
+
     }
 }

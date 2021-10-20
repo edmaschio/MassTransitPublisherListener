@@ -1,5 +1,5 @@
 ﻿using MassTransit;
-using MassTransitPublisherListener.EventContracts;
+using MassTransitPublisherListener.Shared.EventContracts;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 

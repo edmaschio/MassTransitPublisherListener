@@ -1,10 +1,7 @@
 ﻿using MassTransit;
-using MassTransitPublisherListener.EventContracts;
+using MassTransitPublisherListener.Shared.EventContracts;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace MassTransitPublisherListener.Controllers

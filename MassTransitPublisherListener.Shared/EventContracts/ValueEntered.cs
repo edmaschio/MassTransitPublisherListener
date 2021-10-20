@@ -1,4 +1,4 @@
-﻿namespace MassTransitPublisherListener.EventContracts
+﻿namespace MassTransitPublisherListener.Shared.EventContracts
 {
     public interface ValueEntered
     {

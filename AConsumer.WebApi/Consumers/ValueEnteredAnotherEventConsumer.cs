@@ -1,9 +1,9 @@
 ﻿using MassTransit;
-using MassTransitPublisherListener.EventContracts;
+using MassTransitPublisherListener.Shared.EventContracts;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 
-namespace MassTransitPublisherListener.Consumers
+namespace AConsumer.WebApi.Consumers
 {
     public class ValueEnteredAnotherEventConsumer : IConsumer<ValueEntered>
     {
@@ -16,7 +16,7 @@ namespace MassTransitPublisherListener.Consumers
 
         public async Task Consume(ConsumeContext<ValueEntered> context)
         {
-            await Task.Run(() => _logger.LogInformation($"Another Consumed Value: {context.Message.Value}"));
+            await Task.Run(() => _logger.LogInformation("Another consumed value: {Value}", context.Message.Value));
         }
     }
 }
