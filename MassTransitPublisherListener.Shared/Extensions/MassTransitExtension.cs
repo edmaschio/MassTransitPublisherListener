@@ -1,15 +1,14 @@
 ﻿using MassTransit;
 using MassTransit.ExtensionsDependencyInjectionIntegration;
-using MassTransitPublisherListener.Consumers;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
-namespace MassTransitPublisherListener.Extensions
+namespace MassTransitPublisherListener.Shared.Extensions
 {
     public static class MassTransitExtension
     {
-        public static void AddRabbitMQ(this IServiceCollection services, IConfiguration configuration)
+        public static void AddRabbitMQ(this IServiceCollection services, IConfiguration configuration, Action<IServiceCollectionBusConfigurator> configBus = null)
         {
             var massTransitSection = configuration.GetSection("MassTransit");
             var url = massTransitSection.GetValue<string>("Uri");
@@ -23,7 +22,7 @@ namespace MassTransitPublisherListener.Extensions
 
             services.AddMassTransit(x =>
             {
-                x.AddConsumer<ValueEnteredEventConsumer>();
+                configBus?.Invoke(x);
 
                 x.SetKebabCaseEndpointNameFormatter();
 

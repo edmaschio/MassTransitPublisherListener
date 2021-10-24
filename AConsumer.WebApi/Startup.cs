@@ -1,10 +1,13 @@
-using AConsumer.WebApi.Extensions;
+using AConsumer.WebApi.Consumers;
+using MassTransit.ExtensionsDependencyInjectionIntegration;
+using MassTransitPublisherListener.Shared.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using System;
 
 namespace AConsumer.WebApi
 {
@@ -27,7 +30,7 @@ namespace AConsumer.WebApi
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "AConsumer.WebApi", Version = "v1" });
             });
 
-            services.AddRabbitMQ(Configuration);
+            services.AddRabbitMQ(Configuration, ConfigureConsumers());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,6 +53,15 @@ namespace AConsumer.WebApi
             {
                 endpoints.MapControllers();
             });
+        }
+
+        private static Action<IServiceCollectionBusConfigurator> ConfigureConsumers()
+        {
+            return (config) =>
+            {
+                config.AddConsumer<ValueEnteredAnotherEventConsumer>();
+
+            };
         }
     }
 }

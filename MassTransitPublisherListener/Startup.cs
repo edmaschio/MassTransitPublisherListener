@@ -1,10 +1,13 @@
-using MassTransitPublisherListener.Extensions;
+using MassTransit.ExtensionsDependencyInjectionIntegration;
+using MassTransitPublisherListener.Consumers;
+using MassTransitPublisherListener.Shared.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using System;
 
 namespace MassTransitPublisherListener
 {
@@ -27,7 +30,7 @@ namespace MassTransitPublisherListener
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MassTransitPublisherListener", Version = "v1" });
             });
 
-            services.AddRabbitMQ(Configuration);
+            services.AddRabbitMQ(Configuration, ConfigureConsumers());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,6 +53,14 @@ namespace MassTransitPublisherListener
             {
                 endpoints.MapControllers();
             });
+        }
+
+        private static Action<IServiceCollectionBusConfigurator> ConfigureConsumers()
+        {
+            return (config) =>
+            {
+                config.AddConsumer<ValueEnteredEventConsumer>();
+            };
         }
     }
 }
