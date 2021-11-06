@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 
 namespace AConsumer.WebApi.Consumers
 {
-    public class ValueEnteredAnotherEventConsumer : IConsumer<ValueEntered>
+    public class ValueEnteredEventConsumer : IConsumer<ValueEntered>
     {
-        private readonly ILogger<ValueEnteredAnotherEventConsumer> _logger;
+        private readonly ILogger<ValueEnteredEventConsumer> _logger;
 
-        public ValueEnteredAnotherEventConsumer(ILogger<ValueEnteredAnotherEventConsumer> logger)
+        public ValueEnteredEventConsumer(ILogger<ValueEnteredEventConsumer> logger)
         {
             _logger = logger;
         }

@@ -59,7 +59,8 @@ namespace AConsumer.WebApi
         {
             return (config) =>
             {
-                config.AddConsumer<ValueEnteredAnotherEventConsumer>();
+
+                config.AddConsumer<ValueEnteredEventConsumer>().Endpoint(e => e.Name = "custom-endpoint-name");
 
             };
         }

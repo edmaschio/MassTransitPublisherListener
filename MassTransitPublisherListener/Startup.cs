@@ -59,7 +59,7 @@ namespace MassTransitPublisherListener
         {
             return (config) =>
             {
-                config.AddConsumer<ValueEnteredEventConsumer>();
+                config.AddConsumer<ValueEnteredEventConsumer>().Endpoint(e => e.Name = "webapi-endpoint-name");
             };
         }
     }

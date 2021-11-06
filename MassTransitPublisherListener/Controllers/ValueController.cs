@@ -2,6 +2,7 @@
 using MassTransitPublisherListener.Shared.EventContracts;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace MassTransitPublisherListener.Controllers
@@ -21,9 +22,9 @@ namespace MassTransitPublisherListener.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post(string value)
+        public async Task<ActionResult> PostAsync(string value, CancellationToken ct)
         {
-            await _publishEndpoint.Publish<ValueEntered>(new { Value = value });
+            await _publishEndpoint.Publish<ValueEntered>(new { Value = value, Test = 1 }, ct);
 
             _logger.LogInformation($"Published value: {value}");
 
